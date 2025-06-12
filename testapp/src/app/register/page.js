@@ -1,13 +1,38 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+// Custom input để đồng bộ giao diện
+const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+        type="text"
+        onClick={onClick}
+        ref={ref}
+        value={value}
+        readOnly
+        placeholder="Chọn ngày sinh"
+        style={{
+            width: '100%',
+            padding: '0.5rem',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            color: '#000',
+            backgroundColor: '#fff',
+            cursor: 'pointer'
+        }}
+    />
+));
 
 export default function RegisterPage() {
     const router = useRouter();
     const [form, setForm] = useState({
         username: '',
+        fullname: '',
         email: '',
+        dob: null,
         password: '',
         confirmPassword: ''
     });
@@ -18,15 +43,19 @@ export default function RegisterPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (form.password !== form.confirmPassword) {
             alert('Mật khẩu xác nhận không khớp!');
             return;
         }
 
-        // Xử lý đăng ký ở đây (API, lưu state, v.v.)
-        console.log('Dữ liệu đăng ký:', form);
+        // Xử lý logic đăng ký
+        console.log('Dữ liệu đăng ký:', {
+            ...form,
+            dob: form.dob ? form.dob.toLocaleDateString('vi-VN') : null
+        });
 
-        // Chuyển về trang đăng nhập sau khi đăng ký xong
+        // Điều hướng về login
         router.push('/login');
     };
 
@@ -61,6 +90,19 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ marginBottom: '1rem' }}>
+                    <label htmlFor="fullname" style={{ color: "black" }}>Full Name:</label>
+                    <input
+                        type="text"
+                        id="fullname"
+                        name="fullname"
+                        required
+                        value={form.fullname}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', color: "black" }}
+                    />
+                </div>
+
+                <div style={{ marginBottom: '1rem' }}>
                     <label htmlFor="email" style={{ color: "black" }}>Email:</label>
                     <input
                         type="email"
@@ -72,6 +114,34 @@ export default function RegisterPage() {
                         style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc', color: "black" }}
                     />
                 </div>
+
+                <div style={{ marginBottom: '1rem' }}>
+                    <label htmlFor="dob" style={{ color: "black", display: 'block', marginBottom: '0.5rem' }}>Ngày sinh:</label>
+                    <DatePicker
+                        selected={form.dob}
+                        onChange={(date) => setForm({ ...form, dob: date })}
+                        dateFormat="dd/MM/yyyy"
+                        maxDate={new Date()}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        customInput={
+                            <input
+                                type="text"
+                                readOnly
+                                style={{
+                                    width: '171%',
+                                    padding: '0.5rem',
+                                    borderRadius: '4px',
+                                    border: '1px solid #ccc',
+                                    color: '#000',
+                                    backgroundColor: '#fff',
+                                    cursor: 'pointer'
+                                }}
+                            />
+                        }
+                    />
+                </div>
+
 
                 <div style={{ marginBottom: '1rem' }}>
                     <label htmlFor="password" style={{ color: "black" }}>Mật khẩu:</label>
