@@ -6,7 +6,7 @@ export default function ConsultantDashboard() {
       <header className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-xl font-bold">Chuyên viên Demo</h1>
-          <p className="text-sm text-black">Chuyên viên tư vấn</p>
+          <p className="text-sm text-gray-500">Chuyên viên tư vấn</p>
         </div>
         <div className="flex items-center gap-4">
           <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded">Consultant</span>
@@ -38,7 +38,7 @@ export default function ConsultantDashboard() {
             <div className="space-y-4">
               <div className="bg-white p-4 rounded shadow">
                 <h3 className="font-bold">Nguyễn Văn E</h3>
-                <p className="text-sm text-black">Tiến triển điều trị - 5 buổi tư vấn</p>
+                <p className="text-sm text-gray-500">Tiến triển điều trị - 5 buổi tư vấn</p>
                 <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                   <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '70%' }}></div>
                 </div>
@@ -104,7 +104,7 @@ function DashboardCard({ title, value, color }) {
   };
   return (
     <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-sm text-black">{title}</h3>
+      <h3 className="text-sm text-gray-500">{title}</h3>
       <p className={`text-2xl font-bold ${colorMap[color]}`}>{value}</p>
     </div>
   );
@@ -124,9 +124,9 @@ function AppointmentCard({ name, time, status, level }) {
     <div className="bg-white p-3 rounded border mb-3">
       <div className="flex justify-between text-sm">
         <span className="font-semibold">{time}</span>
-        <span className="text-xs px-2 py-0.5 rounded bg-gray-200 text-black">{status}</span>
+        <span className="text-xs px-2 py-0.5 rounded bg-gray-200">{status}</span>
       </div>
-      <div className="mt-1">{name} <span className="ml-2 text-xs text-black">{level}</span></div>
+      <div className="mt-1">{name} <span className="ml-2 text-xs text-gray-500">{level}</span></div>
       <div className="flex gap-2 mt-2">
         <button className="bg-white border px-3 py-1 rounded text-sm">Xem hồ sơ</button>
         <button className="bg-gray-800 text-white px-3 py-1 rounded text-sm">Bắt đầu</button>
