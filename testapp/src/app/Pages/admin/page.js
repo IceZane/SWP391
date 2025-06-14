@@ -203,7 +203,12 @@ export default function AdminDashboard() {
                             {/* Thao tác quản trị */}
                             <div className="bg-white rounded-xl shadow p-4">
                                 <h2 className="text-lg font-semibold mb-3">Thao tác quản trị</h2>
-                                <button className="w-full bg-gray-900 text-white py-2 rounded mb-2">Quản lý người dùng</button>
+                                <button
+                                    className="w-full bg-gray-900 text-white py-2 rounded mb-2"
+                                    onClick={() => setTab('users')}
+                                >
+                                    Quản lý người dùng
+                                </button>
                                 <button className="w-full bg-white border py-2 rounded mb-2 flex items-center gap-2 justify-center">
                                     <span role="img" aria-label="setting">⚙️</span> Cấu hình hệ thống
                                 </button>
@@ -314,7 +319,24 @@ export default function AdminDashboard() {
                 </div>
             )}
 
-            {/* Bạn có thể thêm tab "system" nếu muốn */}
+            {tab === 'system' && (
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-xl font-bold mb-6">Cấu hình hệ thống</h2>
+                    <div className="bg-white rounded-xl shadow p-6 mb-6">
+                        <h3 className="text-lg font-semibold mb-2">Cài đặt email</h3>
+                        <p className="text-sm text-gray-500 mb-4">Cấu hình SMTP và email template</p>
+                        <button className="bg-gray-900 text-white px-4 py-2 rounded">Cấu hình email</button>
+                    </div>
+                    <div className="bg-white rounded-xl shadow p-6">
+                        <h3 className="text-lg font-semibold mb-2">Backup &amp; Restore</h3>
+                        <p className="text-sm text-gray-500 mb-4">Quản lý sao lưu và khôi phục dữ liệu</p>
+                        <div className="flex gap-2">
+                            <button className="bg-gray-900 text-white px-4 py-2 rounded">Tạo backup</button>
+                            <button className="bg-white border px-4 py-2 rounded">Khôi phục</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
